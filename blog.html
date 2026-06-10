@@ -1,0 +1,23 @@
+---
+layout: page
+title: Blog
+permalink: /blog/
+---
+
+<p class="section-label">[all posts]</p>
+
+{% if site.posts.size > 0 %}
+<ul class="post-list">
+  {% for post in site.posts %}
+  <li class="post-list__item">
+    <span class="post-list__date">{{ post.date | date: "%Y-%m-%d" }}</span>
+    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    {% if post.excerpt %}
+    <p class="post-list__excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="muted">No posts yet. Add a markdown file to <code>_posts/</code> &mdash; see GUIDE.md.</p>
+{% endif %}

@@ -1,0 +1,44 @@
+# Site settings
+# These values are used throughout the templates (e.g. {{ site.title }}).
+# See GUIDE.md for what's safe to change.
+
+title: "nishthefish92"
+description: "Personal site, blog, and portfolio — built with Jekyll, styled like a retro terminal."
+author: "Nishant"
+url: "https://nishthefish92.github.io"
+baseurl: ""
+
+# Markdown engine used to render .md files
+markdown: kramdown
+
+# Blog post URLs look like /blog/post-title/ instead of /2026/06/10/post-title.html
+permalink: /blog/:title/
+
+# Plugins supported natively by GitHub Pages (no GitHub Actions workflow needed)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Default front-matter values
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# Files/folders Jekyll should not copy into the built site
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
+  - GUIDE.md
+  - CLAUDE.md
+  - README.md

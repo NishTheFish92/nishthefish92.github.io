@@ -1,0 +1,12 @@
+# Links shown in the footer on every page, e.g. [github] [email]
+#
+# Fields:
+#   name - label shown in brackets
+#   url  - the link target (use "mailto:you@example.com" for email)
+
+- name: "github"
+  url: "https://github.com/nishthefish92"
+- name: "email"
+  url: "mailto:you@example.com"
+- name: "linkedin"
+  url: "https://www.linkedin.com/in/yourusername"

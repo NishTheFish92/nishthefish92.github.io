@@ -1,0 +1,399 @@
+/* =========================================================================
+   THEME VARIABLES
+   Change these values to recolor the entire site. See GUIDE.md ->
+   "Recolor the theme" for guidance and ready-made alternative palettes.
+   ========================================================================= */
+:root {
+  --bg: #1a1b26;        /* page background */
+  --bg-alt: #16161e;    /* slightly darker panels (terminal title bar) */
+  --fg: #c0caf5;        /* main text color */
+  --muted: #565f89;     /* secondary / dim text */
+  --accent: #7dcfff;    /* links, highlights (cyan) */
+  --accent-2: #bb9af7;  /* secondary accent (magenta/purple) */
+  --green: #9ece6a;     /* success / tags */
+  --yellow: #e0af68;    /* warnings / dot */
+  --red: #f7768e;       /* errors / dot */
+  --border: #292e42;    /* borders, dividers */
+
+  --font-mono: "JetBrains Mono", "Fira Code", "SFMono-Regular", Consolas,
+    "Liberation Mono", Menlo, monospace;
+
+  --max-width: 760px;
+}
+
+/* =========================================================================
+   BASE
+   ========================================================================= */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Subtle CRT scanline overlay */
+.crt {
+  position: relative;
+  min-height: 100vh;
+}
+
+.crt::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.015),
+    rgba(255, 255, 255, 0.015) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+code {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+  font-size: 0.9em;
+  color: var(--accent-2);
+}
+
+pre {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px 14px;
+  overflow-x: auto;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--fg);
+}
+
+blockquote {
+  margin: 1em 0;
+  padding: 0.4em 1em;
+  border-left: 3px solid var(--accent-2);
+  background: var(--bg-alt);
+  color: var(--muted);
+}
+
+img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+hr {
+  border: none;
+  border-top: 1px dashed var(--border);
+  margin: 2em 0;
+}
+
+/* =========================================================================
+   TERMINAL WINDOW HEADER / NAV
+   ========================================================================= */
+.term-window {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  background: var(--bg-alt);
+}
+
+.term-window__titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.term-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.term-dot--red {
+  background: var(--red);
+}
+
+.term-dot--yellow {
+  background: var(--yellow);
+}
+
+.term-dot--green {
+  background: var(--green);
+}
+
+.term-window__title {
+  margin-left: 8px;
+  color: var(--muted);
+  font-size: 0.85em;
+}
+
+.term-window__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 10px 14px;
+}
+
+.nav-link {
+  color: var(--fg);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  background: var(--border);
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.nav-link--active {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* =========================================================================
+   HERO / HOME PAGE
+   ========================================================================= */
+.hero__prompt {
+  margin: 0;
+  color: var(--muted);
+}
+
+.hero__prompt .prompt {
+  color: var(--green);
+}
+
+.hero__prompt .path {
+  color: var(--accent);
+}
+
+.hero__name {
+  margin: 4px 0 12px;
+  font-size: 2em;
+  color: var(--fg);
+}
+
+.hero__tagline {
+  margin-bottom: 24px;
+}
+
+.recent-posts {
+  margin-top: 32px;
+}
+
+.section-label {
+  color: var(--accent-2);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* =========================================================================
+   POST LISTS (home + blog index)
+   ========================================================================= */
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-list__item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-list__item:last-child {
+  border-bottom: none;
+}
+
+.post-list__date {
+  display: inline-block;
+  min-width: 100px;
+  color: var(--muted);
+}
+
+.post-list__excerpt {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.9em;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* =========================================================================
+   SINGLE POST
+   ========================================================================= */
+.post__title {
+  margin-bottom: 4px;
+}
+
+.post__meta {
+  color: var(--muted);
+  margin-top: 0;
+  font-size: 0.9em;
+}
+
+.post__tags {
+  margin-left: 8px;
+}
+
+.post__back {
+  margin-top: 32px;
+}
+
+/* =========================================================================
+   TAGS (used in posts + project cards)
+   ========================================================================= */
+.tag {
+  display: inline-block;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  color: var(--green);
+  border-radius: 3px;
+  padding: 0.1em 0.5em;
+  font-size: 0.8em;
+  margin: 0 4px 4px 0;
+}
+
+/* =========================================================================
+   PAGES (about, projects, blog index wrapper)
+   ========================================================================= */
+.page__title {
+  margin-bottom: 16px;
+}
+
+/* =========================================================================
+   PROJECT CARDS
+   ========================================================================= */
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.project-card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  background: var(--bg-alt);
+}
+
+.project-card__name {
+  margin: 0 0 6px;
+}
+
+.project-card__description {
+  margin: 0 0 8px;
+  color: var(--fg);
+}
+
+.project-card__tech {
+  margin: 0 0 8px;
+}
+
+.project-card__links {
+  margin: 0;
+}
+
+/* =========================================================================
+   404 PAGE
+   ========================================================================= */
+.error-page__line {
+  color: var(--red);
+  margin: 4px 0;
+}
+
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
+.site-footer {
+  margin-top: 48px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85em;
+}
+
+.site-footer__social a {
+  margin-right: 12px;
+}
+
+.site-footer__meta {
+  margin-top: 8px;
+}
+
+/* Blinking cursor accent */
+.cursor {
+  display: inline-block;
+  animation: blink 1s steps(1) infinite;
+  color: var(--accent);
+}
+
+@keyframes blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+/* =========================================================================
+   RESPONSIVE
+   ========================================================================= */
+@media (max-width: 480px) {
+  .hero__name {
+    font-size: 1.6em;
+  }
+
+  .post-list__date {
+    display: block;
+    min-width: 0;
+    margin-bottom: 2px;
+  }
+}

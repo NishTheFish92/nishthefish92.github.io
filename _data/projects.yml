@@ -1,0 +1,26 @@
+# Each entry below becomes a card on the /projects/ page.
+#
+# Fields:
+#   name        - project name (required)
+#   description - one or two sentence summary (required)
+#   tech        - list of technologies used (optional)
+#   url         - link to a live demo / website (optional)
+#   repo        - link to the source code repository (optional)
+#
+# Copy one of the entries below, edit the values, and paste it as a new
+# list item (each entry starts with "- name:"). Delete the example entries
+# once you've added your own.
+
+- name: "Example Project"
+  description: "A short description of what this project does and why you built it."
+  tech:
+    - "Python"
+    - "Flask"
+  url: "https://example.com"
+  repo: "https://github.com/yourusername/example-project"
+
+- name: "Another Project"
+  description: "Replace this with a real project. Delete this entry if you only have one."
+  tech:
+    - "JavaScript"
+  repo: "https://github.com/yourusername/another-project"

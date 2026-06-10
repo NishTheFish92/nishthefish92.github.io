@@ -1,0 +1,20 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="post__header">
+    <h1 class="post__title">{{ page.title }}</h1>
+    <p class="post__meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+      {% if page.tags.size > 0 %}
+      <span class="post__tags">
+        {% for tag in page.tags %}<span class="tag">#{{ tag }}</span>{% endfor %}
+      </span>
+      {% endif %}
+    </p>
+  </header>
+  <div class="post__content">
+    {{ content }}
+  </div>
+  <p class="post__back"><a href="{{ '/blog/' | relative_url }}">&lt; back to ~/blog</a></p>
+</article>

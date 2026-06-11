@@ -2,8 +2,8 @@
 # These values are used throughout the templates (e.g. {{ site.title }}).
 # See GUIDE.md for what's safe to change.
 
-title: "nishthefish92"
-description: "Personal site, blog, and portfolio — built with Jekyll, styled like a retro terminal."
+title: "NishTheFish"
+description: "Nishant's personal site"
 author: "Nishant"
 url: "https://nishthefish92.github.io"
 baseurl: ""

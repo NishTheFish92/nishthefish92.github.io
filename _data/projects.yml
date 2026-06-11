@@ -11,16 +11,32 @@
 # list item (each entry starts with "- name:"). Delete the example entries
 # once you've added your own.
 
-- name: "Example Project"
-  description: "A short description of what this project does and why you built it."
+- name: "NotesAssistant"
+  description: "Rag powered application which takes lecture notes and allows the user to query an LLM based on these notes."
+  tech:
+    - "Python"
+    - "Langchain"
+    - "Huggingface BGE Embeddings"
+    - "FAISS Vector store"
+    - "ChatGoogleGenerative AI - Gemini API"
+  url: "https://github.com/NishTheFish92/NotesAssistant"
+
+- name: "Spotify Helper Agent"
+  description: "A langchain powered Spotify agent which converts Natural language to Spotify commands."
+  tech:
+    - "Python"
+    - "Langchain"
+    - "Spotify developer API"
+    - "LastFM"
+    - "Serp API"
+  url: "https://github.com/NishTheFish92/Spotify_Helper_Agent"
+
+- name: "Edge AQI"
+  description: "Edge computing system for real-time indoor air quality monitoring and spatial heatmap generation."
   tech:
     - "Python"
     - "Flask"
-  url: "https://example.com"
-  repo: "https://github.com/yourusername/example-project"
-
-- name: "Another Project"
-  description: "Replace this with a real project. Delete this entry if you only have one."
-  tech:
-    - "JavaScript"
-  repo: "https://github.com/yourusername/another-project"
+    - "sqlite"
+    - "C++"
+    - "ESP32"
+  url: "https://github.com/NishTheFish92/Edge_AQI"

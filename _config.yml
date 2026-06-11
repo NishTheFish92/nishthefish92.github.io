@@ -40,5 +40,7 @@ exclude:
   - vendor
   - node_modules
   - GUIDE.md
+  - CODEBASE.md
   - CLAUDE.md
   - README.md
+  - assets/fonts/README.md

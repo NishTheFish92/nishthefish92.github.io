@@ -4,8 +4,8 @@
    "Recolor the theme" for guidance and ready-made alternative palettes.
    ========================================================================= */
 :root {
-  --bg: #1a1b26;        /* page background */
-  --bg-alt: #16161e;    /* slightly darker panels (terminal title bar) */
+  --bg: #0d0d13;        /* page background */
+  --bg-alt: #0a0a0d;    /* darker panels (terminal title bar) */
   --fg: #c0caf5;        /* main text color */
   --muted: #565f89;     /* secondary / dim text */
   --accent: #7dcfff;    /* links, highlights (cyan) */
@@ -15,10 +15,21 @@
   --red: #f7768e;       /* errors / dot */
   --border: #292e42;    /* borders, dividers */
 
-  --font-mono: "JetBrains Mono", "Fira Code", "SFMono-Regular", Consolas,
-    "Liberation Mono", Menlo, monospace;
+  /* "VCR OSD Mono" only renders if the font file is added under
+     assets/fonts/ (see assets/fonts/README.md) or is installed on the
+     visitor's system. Until then, the next font in this list is used. */
+  --font-mono: "VCR OSD Mono", "JetBrains Mono", "Fira Code",
+    "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 
   --max-width: 760px;
+}
+
+@font-face {
+  font-family: "VCR OSD Mono";
+  src: url("/assets/fonts/VCR_OSD_MONO.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* =========================================================================
@@ -140,9 +151,14 @@ hr {
 .term-window__titlebar {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
   padding: 10px 14px;
   border-bottom: 1px solid var(--border);
+}
+
+.term-window__dots {
+  display: flex;
+  gap: 8px;
 }
 
 .term-dot {
@@ -165,7 +181,6 @@ hr {
 }
 
 .term-window__title {
-  margin-left: 8px;
   color: var(--muted);
   font-size: 0.85em;
 }

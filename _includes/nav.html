@@ -1,9 +1,11 @@
 <header class="term-window">
   <div class="term-window__titlebar">
-    <span class="term-dot term-dot--red"></span>
-    <span class="term-dot term-dot--yellow"></span>
-    <span class="term-dot term-dot--green"></span>
     <span class="term-window__title">guest@{{ site.title }}: ~</span>
+    <span class="term-window__dots">
+      <span class="term-dot term-dot--red"></span>
+      <span class="term-dot term-dot--yellow"></span>
+      <span class="term-dot term-dot--green"></span>
+    </span>
   </div>
   <nav class="term-window__nav">
     <a href="{{ '/' | relative_url }}" class="nav-link{% if page.url == '/' %} nav-link--active{% endif %}">&gt; ~/</a>

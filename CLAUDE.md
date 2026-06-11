@@ -8,9 +8,10 @@ A Jekyll site for the GitHub Pages **user site** `nishthefish92.github.io`
 (served at `https://nishthefish92.github.io`). It's a personal
 blog/portfolio with a retro CLI/terminal aesthetic.
 
-For end-user instructions (publishing, writing posts, editing content), see
-`GUIDE.md` — that's the primary doc for the site owner. This file is for
-whoever is writing code/templates for the site.
+Two owner-facing docs exist: `CODEBASE.md` (a detailed file-by-file
+walkthrough of how the site is built) and `GUIDE.md` (how to enter content —
+bio, posts, projects, links, theme). This file is for whoever is writing
+code/templates for the site.
 
 ## Current approach: terminal-styled, normal navigation
 
@@ -26,6 +27,14 @@ indexable.
   top of `assets/css/style.css` (`--bg`, `--fg`, `--accent`, etc.). Any new
   styles should reference these variables, not hardcoded hex values, so the
   whole site can be recolored from one place.
+- **Font as a CSS variable with safe fallback**: `--font-mono` leads with
+  "VCR OSD Mono", loaded via a local `@font-face` pointing at
+  `assets/fonts/VCR_OSD_MONO.ttf` (now present in the repo — see
+  `assets/fonts/README.md`). If that file is ever removed, the browser falls
+  back to "JetBrains Mono" (loaded via Google Fonts in `_includes/head.html`)
+  with no errors. Keep this fallback chain intact when changing fonts. Only
+  list one `src` per format in `@font-face` — listing a format whose file
+  doesn't exist can prevent fallback to the next `src` in some browsers.
 - **GitHub-Pages-supported plugins only**: `_config.yml` lists
   `jekyll-feed`, `jekyll-seo-tag`, `jekyll-sitemap`. Stick to plugins in the
   `github-pages` gem's allowlist so the site builds with the native GitHub
@@ -35,8 +44,9 @@ indexable.
 - **Data-driven content**: portfolio entries live in `_data/projects.yml`,
   social links in `_data/social.yml`. New repeatable content of this kind
   should follow the same pattern rather than being hardcoded into templates.
-- Keep `GUIDE.md` in sync with any change that affects how the site owner
-  enters content or previews/publishes the site.
+- Keep `GUIDE.md` in sync with any change to how content is entered or the
+  site is previewed/published, and `CODEBASE.md` in sync with any structural
+  change (layouts, includes, config, build pipeline, CSS architecture).
 
 ## Planned future enhancement: interactive JS terminal landing page
 

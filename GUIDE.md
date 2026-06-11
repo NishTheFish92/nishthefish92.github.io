@@ -1,340 +1,148 @@
-# Guide: How this site works (and how to update it)
+# Guide: entering data
 
-This guide assumes you know nothing about Jekyll. By the end, you should be
-able to:
+How to add and edit content on the site. This assumes you're comfortable with
+Markdown — it focuses on the project-specific bits (where things live, what
+fields exist, and the gotchas). For how the whole thing is wired together, see
+`CODEBASE.md`.
 
-- Understand what each file/folder does
-- Publish changes by editing files on github.com (no software install)
-- Optionally preview the site on your own computer before publishing
-- Write blog posts, add portfolio projects, edit your bio, change links, and
-  recolor the site
-
----
-
-## 1. What this is
-
-- **Jekyll** is a tool that turns plain text/Markdown files into a full
-  website (HTML, CSS). You write simple `.md` files; Jekyll wraps them in
-  the page design (the "layout") and produces a website.
-- **GitHub Pages** is a free hosting service built into GitHub. Because this
-  repository is named `nishthefish92.github.io`, GitHub automatically:
-  1. Watches the default branch (`main`) for changes.
-  2. Runs Jekyll to build the site.
-  3. Publishes the result at **https://nishthefish92.github.io**.
-
-So the whole workflow is: **edit a file → commit → push (or save on
-github.com) → wait ~30-60 seconds → site updates automatically.** There is
-no separate "deploy" step and no server to manage.
-
-> **One-time setup**: if you haven't already, enable Pages for this repo:
-> go to **Settings → Pages**, and under "Build and deployment" set
-> **Source = Deploy from a branch**, branch = `main`, folder = `/ (root)`.
-> Save. The first build can take a minute or two.
+**The 5 files you'll actually touch:** `index.md`, `about.md`, `_posts/*`,
+`_data/projects.yml`, `_data/social.yml`. Everything else is structure.
 
 ---
 
-## 2. Map of the project
+## Workflow: edit → preview → publish
 
-| Path | What it is | Do you edit it? |
-|---|---|---|
-| `_config.yml` | Site-wide settings: title, description, author, plugins | Occasionally (site name/description) |
-| `index.md` | The home page | Yes — your tagline & intro |
-| `about.md` | The `/about/` page | Yes — your full bio |
-| `blog.html` | The `/blog/` page (auto-lists all posts) | Rarely |
-| `projects.md` | The `/projects/` page (reads `_data/projects.yml`) | Rarely (edit the data file instead) |
-| `404.html` | Page shown for broken links | Rarely |
-| `_posts/` | Your blog posts, one file per post | **Yes — this is where you write** |
-| `_data/projects.yml` | Your portfolio entries (used by `/projects/`) | **Yes** |
-| `_data/social.yml` | Links shown in the footer (GitHub, email, etc.) | **Yes** |
-| `_layouts/` | Page templates (default page, post page, etc.) | Only for design changes |
-| `_includes/` | Reusable HTML snippets (nav bar, footer, `<head>`) | Only for design changes |
-| `assets/css/style.css` | All styling, including the color theme | Yes — to recolor |
-| `Gemfile` | Lists the Ruby tools needed for local preview | No |
-| `GUIDE.md` | This file | No |
-| `CLAUDE.md` | Notes for future development (not shown on the site) | No |
+**Publish (the only required step):** commit a change to the `main` branch —
+either edit on github.com (pencil icon → Commit changes) or push from your
+machine. GitHub rebuilds and the live site updates in ~30–60s. No deploy step.
 
-**The short version**: 90% of the time, you'll only touch `_posts/`,
-`_data/projects.yml`, `_data/social.yml`, `about.md`, and `index.md`.
+> First time only: enable hosting at repo **Settings → Pages** →
+> Source = *Deploy from a branch* → branch `main`, folder `/ (root)`.
+
+**Preview locally (optional, recommended before publishing):**
+
+```bash
+bundle install        # one-time, installs Jekyll + plugins from the Gemfile
+bundle exec jekyll serve   # serves http://localhost:4000, auto-rebuilds on save
+```
+
+Refresh the browser to see edits. Two exceptions: editing `_config.yml`
+requires restarting the server, and future-dated posts need
+`bundle exec jekyll serve --future`. (If Ruby isn't installed:
+`sudo apt install ruby-full build-essential && gem install bundler`.)
 
 ---
 
-## 3. Publishing — editing directly on github.com
+## Edit your bio
 
-You don't need to install anything to update content.
-
-1. Go to the repository on github.com.
-2. Open the file you want to change (e.g. `about.md`).
-3. Click the **pencil icon** ("Edit this file") in the top-right of the file
-   view.
-4. Make your changes.
-5. Scroll down to "Commit changes", add a short message describing what you
-   changed, and click **Commit changes** (this commits directly to `main`).
-6. Wait about 30-60 seconds, then check
-   **https://nishthefish92.github.io** — your change should be live.
-
-**To create a new file** (e.g. a new blog post): inside the `_posts/`
-folder on github.com, click **Add file → Create new file**, type the
-filename (see the blog post format below), paste your content, and commit.
-
-**Watching the build**: click the **Actions** tab in the repo. Each commit
-triggers a "pages build and deployment" run. A green check means it
-published successfully; a red X means something went wrong (see
-Troubleshooting).
+- **Home page intro** — `index.md`: replace the two `PLACEHOLDER` paragraphs
+  in the `<section class="hero">` block.
+- **Full bio** — `about.md`: replace the placeholder content. Plain Markdown;
+  the page heading is added automatically.
 
 ---
 
-## 4. One-time local setup (optional, for previewing before you publish)
+## Write a blog post
 
-This lets you see your changes on your own computer at
-`http://localhost:4000` before committing.
-
-1. **Install Ruby** (version 3.1+ recommended).
-   - macOS: `brew install ruby`
-   - Linux (Debian/Ubuntu): `sudo apt install ruby-full build-essential`
-   - Windows: use [RubyInstaller](https://rubyinstaller.org/) (pick the
-     "with DevKit" version)
-2. **Install Bundler** (manages Ruby gems/dependencies):
-   ```
-   gem install bundler
-   ```
-3. **Install this site's dependencies**. From inside the project folder:
-   ```
-   bundle install
-   ```
-   This reads the `Gemfile` and installs Jekyll plus the GitHub Pages
-   plugins, so your local build matches what GitHub will produce.
-
-You only need to do this once per computer (re-run `bundle install` if
-`Gemfile` ever changes).
-
----
-
-## 5. Preview locally
-
-From the project folder, run:
-
-```
-bundle exec jekyll serve
-```
-
-- Open **http://localhost:4000** in your browser.
-- The terminal window will stay open and watch for file changes — most edits
-  (posts, pages, data files) automatically rebuild and you just need to
-  refresh the browser.
-- **Exception**: if you edit `_config.yml`, stop the server (`Ctrl+C`) and
-  run `bundle exec jekyll serve` again — config changes require a restart.
-- To stop the server, press `Ctrl+C` in the terminal.
-
-Once you're happy with how it looks locally, commit and push your changes
-(or edit on github.com as in section 3) to publish.
-
----
-
-## 6. Entering your data
-
-### 6.1 Edit your bio
-
-- **Short version (home page)**: open `index.md`. Replace the two
-  `PLACEHOLDER` paragraphs in the `hero` section with your real tagline and
-  a short intro.
-- **Full bio**: open `about.md` and replace the placeholder headings/bullets
-  with your real background, what you do, your skills, etc. It's plain
-  Markdown — see the cheat sheet below.
-
-### 6.2 Write a blog post
-
-1. In the `_posts/` folder, create a new file named:
-   ```
-   YYYY-MM-DD-short-title.md
-   ```
-   Example: `2026-07-01-learning-rust.md`. The date **must** be in this
-   format and matches (or predates) today — Jekyll uses it for sorting and
-   the post URL.
-2. Start the file with **front matter** (the part between the `---` lines),
-   then your content in Markdown below it:
-
-   ```markdown
-   ---
-   title: "Learning Rust"
-   date: 2026-07-01 09:00:00 +0000
-   tags: [rust, learning]
-   ---
-
-   Today I started learning Rust. Here's what I've found so far...
-   ```
-
-   - `title` — shown as the page title and in post listings.
-   - `date` — controls ordering and the displayed date. Must match or be
-     earlier than the current date — **future-dated posts won't appear**
-     until that date arrives (or until built locally with the
-     `--future` flag: `bundle exec jekyll serve --future`).
-   - `tags` — optional list of short labels, shown under the title.
-
-3. Save (or commit). The post automatically appears on the home page
-   ("recent posts") and on `/blog/` — you don't need to edit any other file.
-
-Use `_posts/2026-06-10-welcome.md` as a working example/template — copy it
-and edit.
-
-### 6.3 Add a portfolio project
-
-Open `_data/projects.yml`. Each project is a list entry like:
-
-```yaml
-- name: "My Cool App"
-  description: "A web app that does X, built because Y."
-  tech:
-    - "Python"
-    - "React"
-  url: "https://my-cool-app.example.com"
-  repo: "https://github.com/yourusername/my-cool-app"
-```
-
-- `name` and `description` are required.
-- `tech`, `url`, and `repo` are optional — omit a line if it doesn't apply
-  (e.g. no live demo? remove the `url` line).
-- Add as many entries as you like; each becomes a card on `/projects/`.
-- Delete the two example entries once you've added your real projects.
-
-**Important**: this is YAML, so indentation matters. Copy an existing entry
-and edit the values rather than typing one from scratch.
-
-### 6.4 Add or change social/contact links
-
-Open `_data/social.yml`:
-
-```yaml
-- name: "github"
-  url: "https://github.com/nishthefish92"
-- name: "email"
-  url: "mailto:you@example.com"
-```
-
-- `name` is the label shown in brackets in the footer (e.g. `[github]`).
-- `url` is where it links. For email, use `mailto:address@example.com`.
-- Add, remove, or reorder entries freely.
-
-### 6.5 Change the site name/description
-
-Open `_config.yml` and edit:
-
-```yaml
-title: "nishthefish92"
-description: "Personal site, blog, and portfolio..."
-author: "Nishant"
-```
-
-- `title` appears in the browser tab, the terminal window title bar, and the
-  nav prompt (`guest@<title>: ~`).
-- Remember: changes to `_config.yml` require restarting `jekyll serve` to
-  see locally (no restart needed when published via GitHub Pages).
-
-### 6.6 Recolor the theme
-
-Open `assets/css/style.css` and look at the `:root { ... }` block at the
-very top — every color in the site is defined there:
-
-```css
-:root {
-  --bg: #1a1b26;        /* page background */
-  --fg: #c0caf5;        /* main text color */
-  --accent: #7dcfff;    /* links, highlights */
-  --accent-2: #bb9af7;  /* secondary accent */
-  --green: #9ece6a;
-  --yellow: #e0af68;
-  --red: #f7768e;
-  --border: #292e42;
-  ...
-}
-```
-
-Change any hex value and the whole site updates — no need to hunt through
-other files. For example, for a classic green-on-black terminal look, try:
-
-```css
---bg: #0a0a0a;
---fg: #33ff66;
---accent: #33ff66;
---muted: #1f7a36;
---border: #1f3d27;
-```
-
----
-
-## 7. Markdown + front matter cheat sheet
+Create a file in `_posts/` named `YYYY-MM-DD-short-title.md`:
 
 ```markdown
-# Heading 1
-## Heading 2
-### Heading 3
+---
+title: "Learning Rust"
+date: 2026-07-01 09:00:00 +0000
+tags: [rust, learning]
+---
 
-**bold text**
-*italic text*
-
-[link text](https://example.com)
-
-![image alt text](/assets/images/photo.jpg)
-
-- bullet item
-- another item
-
-1. numbered item
-2. another item
-
-> a quoted block
-
-`inline code`
-
-```python
-# a fenced code block with syntax highlighting
-print("hello")
+Your post body in Markdown...
 ```
 
----  (a horizontal rule / divider)
-```
+- **Filename date and `date:`** should agree. The filename date + the
+  `-short-title` slug determine the URL → `/blog/short-title/`.
+- `title` — shown in listings and as the page heading.
+- `date` — controls ordering and the displayed date. A date **in the future**
+  hides the post until that day (use `--future` to preview early).
+- `tags` — optional list, rendered as `#tag` chips.
 
-**Front matter** is the block at the top of `.md` files between two `---`
-lines. It's written in YAML and sets metadata Jekyll uses (title, date,
-layout, tags, etc.). Every page and post needs it, even if it's just:
+It auto-appears on the home page (newest 5) and `/blog/` (all). Copy
+`_posts/2026-06-10-welcome.md` as a starting template.
+
+---
+
+## Add a portfolio project
+
+Edit `_data/projects.yml`. Each list entry becomes a card on `/projects/`:
 
 ```yaml
----
-title: My Page
----
+- name: "My Cool App"            # required
+  description: "What it does."   # required
+  tech:                          # optional list of chips
+    - "Python"
+    - "React"
+  url: "https://demo.example.com"          # optional — links the title
+  repo: "https://github.com/you/cool-app"  # optional — adds a [source] link
 ```
 
+Omit any optional line you don't need. It's YAML, so indentation matters
+(spaces, not tabs) — copy an existing entry rather than typing from scratch.
+Delete the two example entries once you've added your own.
+
 ---
 
-## 8. Troubleshooting
+## Edit social / footer links
 
-**My new post isn't showing up**
-- Check the filename format: `YYYY-MM-DD-title.md` in `_posts/`.
-- Check the `date:` in front matter isn't in the future (or use
-  `--future` when running locally).
-- Check the front matter starts and ends with `---` on its own line.
+Edit `_data/social.yml`. Each entry is a bracketed link in the footer:
 
-**The live site didn't update after I committed**
-- Go to the **Actions** tab and check the latest "pages build and
-  deployment" run. A red X means the build failed — click into it to see
-  the error (often a YAML syntax mistake in `_config.yml` or a `_data/*.yml`
-  file, or broken front matter in a post).
-- Give it a minute — builds aren't instant.
+```yaml
+- name: "github"                          # label shown as [github]
+  url: "https://github.com/nishthefish92"
+- name: "email"
+  url: "mailto:you@example.com"           # use mailto: for email
+```
 
-**I changed `_config.yml` but nothing happened locally**
-- Stop (`Ctrl+C`) and restart `bundle exec jekyll serve`. Config changes
-  need a restart; content changes don't.
+Add, remove, or reorder freely.
 
-**A page looks broken / unstyled**
-- Make sure the file's front matter has the opening and closing `---` lines
-  and a `layout:` value (or that it's a type that gets a default layout —
-  see `_config.yml`'s `defaults` section).
+---
 
-**`bundle install` or `jekyll serve` fails**
-- Make sure Ruby and Bundler are installed (section 4) and that you're
-  running the command from inside the project folder (the one containing
-  `Gemfile`).
+## Site name / description
 
-**YAML errors in `_data/projects.yml` or `_data/social.yml`**
-- YAML is picky about indentation (use spaces, not tabs) and requires a
-  space after each colon (`name: "value"`, not `name:"value"`). Copy an
-  existing entry's structure exactly when adding a new one.
+Edit `_config.yml`:
+
+```yaml
+title: "nishthefish92"      # browser tab, terminal titlebar, nav prompt
+description: "..."          # used by SEO/social meta tags
+author: "Nishant"           # footer copyright
+```
+
+Changes here require a server restart to show locally.
+
+---
+
+## Theme (colors + font)
+
+All in the `:root { ... }` block at the top of `assets/css/style.css` — change
+a value, the whole site updates.
+
+```css
+--bg: #0d0d13;        /* page background */
+--bg-alt: #0a0a0d;    /* panels (terminal titlebar, cards) */
+--fg: #c0caf5;        /* main text */
+--accent: #7dcfff;    /* links / highlights */
+/* ...plus --accent-2, --green, --yellow, --red, --border */
+```
+
+**Font:** `--font-mono` leads with "VCR OSD Mono" (file at
+`assets/fonts/VCR_OSD_MONO.ttf`), falling back to JetBrains Mono. To swap
+fonts, see `CODEBASE.md` §8.
+
+---
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---|---|
+| New post not showing | Filename must be `YYYY-MM-DD-title.md`; `date:` not in the future (or use `--future`); front matter fenced by `---` top and bottom. |
+| Live site didn't update | Check repo **Actions** tab — a red ✗ means the build failed (usually a YAML typo). Builds aren't instant. |
+| `_config.yml` change not visible locally | Restart `bundle exec jekyll serve` (only this file needs a restart). |
+| Page renders unstyled / raw | Front matter missing its opening/closing `---` lines. |
+| YAML error in `_data/*` | Use spaces not tabs; space after each colon (`name: "x"`). Copy a working entry's structure. |
+| `bundle`/`jekyll` command fails | Ruby + Bundler installed? Run from the folder containing `Gemfile`. |

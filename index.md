@@ -6,17 +6,15 @@ permalink: /
 
 <section class="hero">
   <p class="hero__prompt"><span class="prompt">guest@{{ site.title }}</span><span class="path">:~$</span> whoami</p>
-  <h1 class="hero__name">Nishant</h1>
+  <h1 class="hero__name">Nishant Ajit</h1>
   <p class="hero__tagline">
-    PLACEHOLDER &mdash; replace this with a one or two line tagline about who you are
-    and what you do. Edit the <code>hero</code> section in <code>index.md</code>.
+    A 4th year student who loves manga, cats, gaming and running. I love working with my hands and opening things up, whether it's building a PC or fixing a faulty tablefan.
   </p>
 
   <p class="hero__prompt"><span class="prompt">guest@{{ site.title }}</span><span class="path">:~$</span> cat about.txt | head -n 3</p>
   <p>
-    PLACEHOLDER &mdash; a short intro paragraph goes here. See
-    <a href="{{ '/about/' | relative_url }}">~/about</a> for the full bio &mdash;
-    edit <code>about.md</code> to change it.
+    Welcome to my site! I'm a 4th year computer science student specializing in IoT studying in VIT Vellore. 
+    To learn more about me, visit <a href="{{ '/about/' | relative_url }}">~/about</a>
   </p>
 </section>
 

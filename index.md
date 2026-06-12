@@ -7,9 +7,7 @@ permalink: /
 <section class="hero">
   <p class="hero__prompt"><span class="prompt">guest@{{ site.title }}</span><span class="path">:~$</span> whoami</p>
   <h1 class="hero__name">Nishant Ajit</h1>
-  <p class="hero__tagline">
-    A 4th year student who loves manga, cats, gaming and running. I love working with my hands and opening things up, whether it's building a PC or fixing a faulty tablefan.
-  </p>
+  <p class="hero__tagline"></p>
 
   <p class="hero__prompt"><span class="prompt">guest@{{ site.title }}</span><span class="path">:~$</span> cat about.txt | head -n 3</p>
   <p>

@@ -48,14 +48,18 @@ required for the site to be fully usable or indexable.
   top of `assets/css/style.css` (`--bg`, `--fg`, `--accent`, etc.). Any new
   styles should reference these variables, not hardcoded hex values, so the
   whole site can be recolored from one place.
-- **Font as a CSS variable with safe fallback**: `--font-mono` leads with
-  "VCR OSD Mono", loaded via a local `@font-face` pointing at
-  `assets/fonts/VCR_OSD_MONO.ttf` (now present in the repo — see
-  `assets/fonts/README.md`). If that file is ever removed, the browser falls
-  back to "JetBrains Mono" (loaded via Google Fonts in `_includes/head.html`)
-  with no errors. Keep this fallback chain intact when changing fonts. Only
-  list one `src` per format in `@font-face` — listing a format whose file
-  doesn't exist can prevent fallback to the next `src` in some browsers.
+- **Font as a CSS variable with safe fallback**: a single monospace face,
+  `--font-mono`, is used site-wide (body, headings, nav, terminal chrome,
+  code) — legibility is prioritized over aesthetic, since recruiters may read
+  the blog. It leads with "Ubuntu Mono", loaded via Google Fonts in
+  `_includes/head.html`, then falls back to "JetBrains Mono" and system
+  monospace fonts if that fails to load. Keep the whole site on this one
+  variable; do not reintroduce a separate display/heading font (an earlier
+  pixel-font experiment with "VCR OSD Mono" / "VT323" was dropped because it
+  hurt readability). The base body size is set on `body` in
+  `assets/css/style.css` (`font-size`); other text uses `em` so it scales from
+  there. The unused `assets/fonts/VCR_OSD_MONO.ttf` remains in the repo but is
+  no longer referenced.
 - **GitHub-Pages-supported plugins only**: `_config.yml` lists
   `jekyll-feed`, `jekyll-seo-tag`, `jekyll-sitemap`. Stick to plugins in the
   `github-pages` gem's allowlist so the site builds with the native GitHub

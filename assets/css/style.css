@@ -15,21 +15,14 @@
   --red: #f7768e;       /* errors / dot */
   --border: #292e42;    /* borders, dividers */
 
-  /* "VCR OSD Mono" only renders if the font file is added under
-     assets/fonts/ (see assets/fonts/README.md) or is installed on the
-     visitor's system. Until then, the next font in this list is used. */
-  --font-mono: "VCR OSD Mono", "JetBrains Mono", "Fira Code",
-    "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  /* "Ubuntu Mono" (loaded via Google Fonts in _includes/head.html) is the
+     single site-wide face — a clean, highly readable monospace, chosen for
+     legibility over aesthetic. The remaining entries are system monospace
+     fallbacks if it fails to load. */
+  --font-mono: "Ubuntu Mono", "JetBrains Mono", "SFMono-Regular", Consolas,
+    "Liberation Mono", Menlo, monospace;
 
   --max-width: 760px;
-}
-
-@font-face {
-  font-family: "VCR OSD Mono";
-  src: url("/assets/fonts/VCR_OSD_MONO.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
 }
 
 /* =========================================================================
@@ -48,7 +41,7 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-mono);
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.6;
 }
 

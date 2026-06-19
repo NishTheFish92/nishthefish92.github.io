@@ -1,6 +1,27 @@
 # CLAUDE.md
 
+This file provides guidance to Claude Code (claude.ai/code) when working with
+code in this repository.
+
 Guidance for future development sessions on this repo.
+
+## Commands
+
+Dependencies are managed with Bundler (`Gemfile` pins the `github-pages` gem so
+local builds match GitHub Pages exactly).
+
+- `bundle install` — install Ruby gem dependencies (first-time setup).
+- `bundle exec jekyll serve --watch` — preview at http://localhost:4000 with
+  live rebuild on file changes. Always preview over `http://`, not by opening
+  `_site/*.html` as a `file://` URL — the CSS/links use absolute paths
+  (`/assets/...`) that only resolve when served.
+- `bundle exec jekyll build` — one-off build into `_site/` (what GitHub Pages
+  runs on push; no manual deploy step).
+
+There is no test/lint suite — this is a static content site. "Verifying" a
+change means building and viewing the served page. Note `jekyll serve` without
+`--watch` does **not** auto-rebuild, so a stale server is a common cause of
+"my change isn't showing."
 
 ## What this is
 
@@ -17,9 +38,9 @@ code/templates for the site.
 
 The site *looks* like a terminal window (`_includes/nav.html` renders a
 title-bar-style box with red/yellow/green dots and a prompt-style nav), but
-navigation is plain `<a>` links to real pages — `/`, `/about/`, `/blog/`,
-`/projects/`. No JavaScript is required for the site to be fully usable or
-indexable.
+navigation is plain `<a>` links to the real content pages, plus a tab that
+opens the resume PDF (`assets/Resume.pdf`) in a new tab. No JavaScript is
+required for the site to be fully usable or indexable.
 
 ## Conventions to preserve
 

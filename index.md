@@ -11,8 +11,10 @@ permalink: /
 
   <p class="hero__prompt"><span class="prompt">guest@{{ site.title }}</span><span class="path">:~$</span> cat about.txt | head -n 3</p>
   <p>
-    Welcome to my site! I'm a 4th year computer science student specializing in IoT studying in VIT Vellore. 
-    To learn more about me, visit <a href="{{ '/about/' | relative_url }}">~/about</a>
+    Welcome to my site! I'm a 4th year computer science student specializing in IoT studying in VIT Vellore. <br>
+    To learn more about me, visit <a href="{{ '/about/' | relative_url }}">~/about</a>.<br>
+    To see what I've worked on, visit <a href="{{ '/projects/' | relative_url }}">~/projects</a>.<br>
+
   </p>
 </section>
 

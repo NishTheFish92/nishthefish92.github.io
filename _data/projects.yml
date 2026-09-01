@@ -31,6 +31,15 @@
     - "Serp API"
   url: "https://github.com/NishTheFish92/Spotify_Helper_Agent"
 
+- name: "Talkcrates"
+  description: "Self Dialogue Journal to encourage Socratic introspection"
+  tech:
+    - "SQL.js"
+    - "IndexedDB"
+    - "Typescript"
+    - "React.js"
+  url: "https://github.com/NishTheFish92/Talkcrates"
+
 - name: "Edge AQI"
   description: "Edge computing system for real-time indoor air quality monitoring and spatial heatmap generation."
   tech:
@@ -40,3 +49,5 @@
     - "C++"
     - "ESP32"
   url: "https://github.com/NishTheFish92/Edge_AQI"
+
+

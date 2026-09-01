@@ -4,10 +4,7 @@ date: 2026-06-10 12:00:00 +0000
 tags: [internship, Health Vectors, requirements]
 ---
 
-This is the first in a series of posts about my summer internship at Health
-Vectors. Each one covers a different slice of the build. The stack and the
-actual implementation come in later posts. This one is only about requirement
-gathering, and the two things it taught me: how to filter, and how to adapt.
+This post covers my experience requirement gathering during my internship at Health Vectors
 
 ## The brief
 

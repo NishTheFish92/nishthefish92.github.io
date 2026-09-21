@@ -1,110 +1,79 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with
-code in this repository.
+This repo is a finished Jekyll blog (`nishthefish92.github.io`). The main use of
+Claude Code here is writing tech blog posts in `_posts/`. For how the site is
+built, see `CODEBASE.md`. For the post file format, see `GUIDE.md`.
 
-Guidance for future development sessions on this repo.
+## Blog writing workflow
 
-## Commands
+When the user wants to write a tech blog, this section applies. The job is to
+turn their loose thoughts into a post that sounds like them, and to make sure
+nothing wrong ends up published. Do not write the post until the user says the
+ideas are in sync.
 
-Dependencies are managed with Bundler (`Gemfile` pins the `github-pages` gem so
-local builds match GitHub Pages exactly).
+### How a session goes
 
-- `bundle install` — install Ruby gem dependencies (first-time setup).
-- `bundle exec jekyll serve --watch` — preview at http://localhost:4000 with
-  live rebuild on file changes. Always preview over `http://`, not by opening
-  `_site/*.html` as a `file://` URL — the CSS/links use absolute paths
-  (`/assets/...`) that only resolve when served.
-- `bundle exec jekyll build` — one-off build into `_site/` (what GitHub Pages
-  runs on push; no manual deploy step).
+1. **User dumps content.** It arrives as a rambly paragraph, usually speech to
+   text. Expect typos, misheard words (especially tech terms and product names),
+   missing punctuation, and half-finished thoughts. Quietly fix the obvious ones
+   from context. If a term could be two different things, ask.
+2. **Play it back.** Summarize what you understood in a few plain bullets or a
+   short paragraph: the main point, the story or steps, and the takeaway. Keep
+   it short. The goal is for the user to see whether we're on the same page.
+3. **Flag anything shaky.** Call out claims that look wrong, oversimplified, or
+   unverifiable, and say why. The user does not want to publish misinformation,
+   so this is the most important step. If a fact is checkable, check it (docs,
+   the code in this repo, a quick search) instead of just asking. Never fill a
+   gap with a confident guess. Say "I'm not sure about this part" and ask.
+4. **Ask sparingly.** A few targeted questions at a time, not a questionnaire.
+   Prefer questions that fill real gaps (what actually happened, why they chose
+   X, what went wrong) over ones that just seek reassurance.
+5. **Repeat** until the user says the ideas are settled. Only then draft.
+6. **Draft** into `_posts/YYYY-MM-DD-short-title.md` (see the format in
+   `GUIDE.md` and the existing post for reference). Use today's date. Show the
+   user the draft and take edits. Don't publish or commit unless asked.
+7. When the draft is done, offer to run the `blog-review` skill for a
+   typo and grammar pass.
 
-There is no test/lint suite — this is a static content site. "Verifying" a
-change means building and viewing the served page. Note `jekyll serve` without
-`--watch` does **not** auto-rebuild, so a stale server is a common cause of
-"my change isn't showing."
+### Content rules
 
-## What this is
+- **Only the user's ideas.** Everything in the post must come from what they
+  said or from things we verified together. Don't add extra claims, stats,
+  benchmarks, comparisons, or "best practices" they didn't mention. If a
+  section feels thin, ask them for more instead of padding it.
+- **Keep their opinions as opinions.** If they say "I found X easier", write it
+  that way. Don't upgrade it to "X is easier".
+- **Code and commands must be real.** Only include snippets the user gave or we
+  ran and confirmed. Don't invent output.
+- **Links.** Add a link the first time a tool, product, or company comes up,
+  but only if you're sure of the URL.
 
-A Jekyll site for the GitHub Pages **user site** `nishthefish92.github.io`
-(served at `https://nishthefish92.github.io`). It's a personal
-blog/portfolio with a retro CLI/terminal aesthetic.
+### Voice
 
-Two owner-facing docs exist: `CODEBASE.md` (a detailed file-by-file
-walkthrough of how the site is built) and `GUIDE.md` (how to enter content —
-bio, posts, projects, links, theme). This file is for whoever is writing
-code/templates for the site.
+Write the way the user talks when explaining something out loud, like they're
+walking a friend through it or narrating a video script. Natural and free
+flowing, not stiff or textbook-y.
 
-## Current approach: terminal-styled, normal navigation
+- First person, direct. "I", "we", "you" are all fine.
+- Contractions are good. "It's", "didn't", "we'll".
+- Short sentences mixed with longer ones. Start sentences with "So", "But",
+  "And", "Now" when it feels right.
+- Explain things the way you'd say them, then name the technical term. Prefer
+  "the server just kept dropping the connection" over "the server exhibited
+  intermittent connection instability".
+- Keep the user's own phrasing and quirks where they work. Clean up only what
+  the speech to text mangled.
+- Avoid corporate and AI-sounding filler: "delve", "leverage", "robust",
+  "seamless", "in today's fast-paced world", "it's important to note",
+  "let's dive in", "in conclusion". No cheesy intro or wrap-up paragraphs.
+- Don't over-format. Some headers to break up sections are fine (the existing
+  post uses `##` headings), but don't turn everything into bullet lists or
+  bolded buzzwords. Write in paragraphs the way you'd talk.
+- Lead with the point or the problem, not with throat clearing.
+- Match the length to the content. A short post is fine.
 
-The site *looks* like a terminal window (`_includes/nav.html` renders a
-title-bar-style box with red/yellow/green dots and a prompt-style nav), but
-navigation is plain `<a>` links to the real content pages, plus a tab that
-opens the resume PDF (`assets/Resume.pdf`) in a new tab. No JavaScript is
-required for the site to be fully usable or indexable.
+### Hard rule: no em dashes
 
-## Conventions to preserve
-
-- **Color palette as CSS variables**: all theme colors live in `:root` at the
-  top of `assets/css/style.css` (`--bg`, `--fg`, `--accent`, etc.). Any new
-  styles should reference these variables, not hardcoded hex values, so the
-  whole site can be recolored from one place.
-- **Font as a CSS variable with safe fallback**: a single monospace face,
-  `--font-mono`, is used site-wide (body, headings, nav, terminal chrome,
-  code) — legibility is prioritized over aesthetic, since recruiters may read
-  the blog. It leads with "Ubuntu Mono", loaded via Google Fonts in
-  `_includes/head.html`, then falls back to "JetBrains Mono" and system
-  monospace fonts if that fails to load. Keep the whole site on this one
-  variable; do not reintroduce a separate display/heading font (an earlier
-  pixel-font experiment with "VCR OSD Mono" / "VT323" was dropped because it
-  hurt readability). The base body size is set on `body` in
-  `assets/css/style.css` (`font-size`); other text uses `em` so it scales from
-  there. The unused `assets/fonts/VCR_OSD_MONO.ttf` remains in the repo but is
-  no longer referenced.
-- **GitHub-Pages-supported plugins only**: `_config.yml` lists
-  `jekyll-feed`, `jekyll-seo-tag`, `jekyll-sitemap`. Stick to plugins in the
-  `github-pages` gem's allowlist so the site builds with the native GitHub
-  Pages Jekyll build (no GitHub Actions workflow needed). If a feature
-  requires a non-whitelisted plugin, either find an allowlisted alternative
-  or add a GitHub Actions build workflow deliberately (and document it).
-- **Data-driven content**: portfolio entries live in `_data/projects.yml`,
-  social links in `_data/social.yml`. New repeatable content of this kind
-  should follow the same pattern rather than being hardcoded into templates.
-- Keep `GUIDE.md` in sync with any change to how content is entered or the
-  site is previewed/published, and `CODEBASE.md` in sync with any structural
-  change (layouts, includes, config, build pipeline, CSS architecture).
-
-## Planned future enhancement: interactive JS terminal landing page
-
-The next major iteration is an **interactive terminal landing page**,
-balanced with the current robust normal-nav pages:
-
-- The homepage (`/`) becomes a fake shell: a blinking prompt
-  (`guest@nishthefish92:~$`) where visitors type commands and see output
-  printed below.
-- **JS-optional / SEO-safe**: `/about/`, `/blog/`, `/projects/`, and
-  individual post pages continue to exist as real static HTML pages (as they
-  do now). The terminal is a navigation/display layer on top — it should
-  read content already rendered by Jekyll (e.g. via `site.posts` /
-  `site.data.projects` serialized to JSON at build time) and link/redirect to
-  the real pages, not duplicate content only-in-JS.
-- **Core command set** (initial scope, intentionally minimal):
-  - `help` — list available commands
-  - `ls` — list "files" (about.txt, blog/, projects/, contact.txt)
-  - `cat <file>` — print a file's content (e.g. `cat about.txt` shows the bio)
-  - `whoami` — one-line intro
-  - `blog` — list posts, link to `/blog/`
-  - `projects` — list portfolio entries, link to `/projects/`
-  - `contact` — print social links from `_data/social.yml`
-  - `clear` — clear the terminal output
-- Provide a visible fallback (e.g. a small "or browse: about · blog ·
-  projects" line) for users who don't want to type commands, and ensure
-  keyboard focus / mobile usability are addressed.
-- Implementation should be vanilla JS, no framework, kept in
-  `assets/js/terminal.js` (or similar), progressively enhancing the existing
-  pages rather than replacing them.
-
-This is **not yet implemented** — the current homepage (`index.md`) is a
-static styled page. When picking this up, re-read this section and
-`GUIDE.md` before changing the page structure, since the guide's
-instructions for editing `index.md` / `about.md` / etc. will need to be
-updated to match.
+Never use em dashes (the long dash character) or `--` as a stand in, in the blog
+content or in the chat while working on it. Use a comma, a period, parentheses,
+or just reword the sentence. Check the final draft for them before showing it.

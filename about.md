@@ -14,9 +14,9 @@ I'm also fond of cats, here's the cat that was my unofficial hostel roommate for
 
 ## What I do
 
-- Learning about IoT architectures.
-- Building innovative tools with LLMs and Agentic AI
+- Building innovative tools and accelerating workflows with LLMs and Agentic AI
 - Working with embedded systems like Arduino and ESP32
+- Strengthening and building my deep learning fundamentals
 
 ## Skills
 

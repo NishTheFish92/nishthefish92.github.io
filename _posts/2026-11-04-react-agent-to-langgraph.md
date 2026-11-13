@@ -2,6 +2,7 @@
 title: "Moving my Spotify agent from a ReAct agent to LangGraph"
 date: 2026-11-04 12:00:00 +0000
 tags: [langchain, langgraph, agents, evals, spotify]
+repo: "https://github.com/NishTheFish92/Spotify_Helper_Agent"
 ---
 
 This post is about why I moved my [Spotify Helper Agent](https://github.com/NishTheFish92/Spotify_Helper_Agent)

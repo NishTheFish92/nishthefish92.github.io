@@ -12,6 +12,9 @@ layout: default
       </span>
       {% endif %}
     </p>
+    {% if page.repo %}
+    <p class="post__repo"><a href="{{ page.repo }}" target="_blank" rel="noopener noreferrer">[github repo]</a></p>
+    {% endif %}
   </header>
   <div class="post__content">
     {{ content }}

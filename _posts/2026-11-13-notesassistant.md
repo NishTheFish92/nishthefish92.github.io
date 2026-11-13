@@ -2,6 +2,7 @@
 title: "Talking to my lecture slides with NotesAssistant"
 date: 2026-11-13 12:00:00 +0000
 tags: [rag, langchain, faiss, embeddings, gemini]
+repo: "https://github.com/NishTheFish92/NotesAssistant"
 ---
 
 This post is a quick look at how I built [NotesAssistant](https://github.com/NishTheFish92/NotesAssistant),
